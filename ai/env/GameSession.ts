@@ -108,6 +108,10 @@ export class GameSession {
   private turn: number;
   private tileChanges: number[] = [];
   private seatPlayers = new Map<ClientID, Player>();
+  private tileSink: ((packed: PackedTileChanges) => void) | null = null;
+  private turnSink:
+    | ((turnNumber: number, intents: StampedIntent[]) => void)
+    | null = null;
 
   private constructor(
     readonly start: GameStartInfo,
@@ -198,6 +202,7 @@ export class GameSession {
                 ({ ...intent, clientID }) as StampedIntent,
             )
           : [];
+      if (this.turnSink !== null) this.turnSink(this.turn, stamped);
       this.game.addExecution(
         ...this.executor.createExecs({
           turnNumber: this.turn++,
@@ -206,7 +211,12 @@ export class GameSession {
       );
       this.game.executeNextTick();
       const packed = this.game.drainPackedTileUpdates();
-      for (let j = 0; j < packed.length; j++) this.tileChanges.push(packed[j]);
+      if (this.tileSink !== null) {
+        this.tileSink(packed);
+      } else {
+        for (let j = 0; j < packed.length; j++)
+          this.tileChanges.push(packed[j]);
+      }
       // Drain the renderer feeds or they grow without bound.
       this.game.drainPackedMotionPlans();
       this.game.drainPackedPlayerUpdates();
@@ -214,6 +224,22 @@ export class GameSession {
       this.game.drainNukeImpacts();
       if (this.isOver()) break;
     }
+  }
+
+  /**
+   * Routes each tick's packed tile changes ([tileRef, state | terrain << 16]
+   * pairs, the renderer's format) to `sink` instead of accumulating them for
+   * drainTileChanges(). Pass null to go back to accumulating.
+   */
+  setTileChangeSink(sink: ((packed: PackedTileChanges) => void) | null): void {
+    this.tileSink = sink;
+  }
+
+  /** Observes every turn fed to the engine (repro bundles, live parity). */
+  setTurnSink(
+    sink: ((turnNumber: number, intents: StampedIntent[]) => void) | null,
+  ): void {
+    this.turnSink = sink;
   }
 
   /** Tile changes accumulated since the previous call. */

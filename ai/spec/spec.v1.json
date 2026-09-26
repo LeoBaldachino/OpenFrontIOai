@@ -1,0 +1,797 @@
+{
+  "version": 1,
+  "presets": {
+    "S": {
+      "name": "S",
+      "GH": 24,
+      "GW": 32,
+      "K": 8,
+      "C": 24,
+      "NS": 64,
+      "FS": 32
+    },
+    "M": {
+      "name": "M",
+      "GH": 48,
+      "GW": 64,
+      "K": 16,
+      "C": 24,
+      "NS": 64,
+      "FS": 32
+    },
+    "L": {
+      "name": "L",
+      "GH": 96,
+      "GW": 128,
+      "K": 16,
+      "C": 24,
+      "NS": 64,
+      "FS": 32
+    }
+  },
+  "num_types": 31,
+  "num_amount": 12,
+  "num_cell_groups": 16,
+  "intents_per_step": 2,
+  "action_types": [
+    {
+      "id": 0,
+      "name": "NOOP",
+      "ptr": false,
+      "tn": false,
+      "cell_group": -1,
+      "amount": "none"
+    },
+    {
+      "id": 1,
+      "name": "SPAWN",
+      "ptr": false,
+      "tn": false,
+      "cell_group": 0,
+      "amount": "none"
+    },
+    {
+      "id": 2,
+      "name": "ATTACK",
+      "ptr": true,
+      "tn": true,
+      "cell_group": -1,
+      "amount": "troops"
+    },
+    {
+      "id": 3,
+      "name": "BOAT",
+      "ptr": true,
+      "tn": true,
+      "cell_group": -2,
+      "amount": "troops"
+    },
+    {
+      "id": 4,
+      "name": "RETREAT",
+      "ptr": true,
+      "tn": true,
+      "cell_group": -1,
+      "amount": "none"
+    },
+    {
+      "id": 5,
+      "name": "CANCEL_BOAT",
+      "ptr": true,
+      "tn": true,
+      "cell_group": -1,
+      "amount": "none"
+    },
+    {
+      "id": 6,
+      "name": "BUILD_CITY",
+      "ptr": false,
+      "tn": false,
+      "cell_group": 1,
+      "amount": "none"
+    },
+    {
+      "id": 7,
+      "name": "BUILD_PORT",
+      "ptr": false,
+      "tn": false,
+      "cell_group": 2,
+      "amount": "none"
+    },
+    {
+      "id": 8,
+      "name": "BUILD_FACTORY",
+      "ptr": false,
+      "tn": false,
+      "cell_group": 3,
+      "amount": "none"
+    },
+    {
+      "id": 9,
+      "name": "BUILD_DEFENSE_POST",
+      "ptr": false,
+      "tn": false,
+      "cell_group": 4,
+      "amount": "none"
+    },
+    {
+      "id": 10,
+      "name": "BUILD_SAM",
+      "ptr": false,
+      "tn": false,
+      "cell_group": 5,
+      "amount": "none"
+    },
+    {
+      "id": 11,
+      "name": "BUILD_SILO",
+      "ptr": false,
+      "tn": false,
+      "cell_group": 6,
+      "amount": "none"
+    },
+    {
+      "id": 12,
+      "name": "UPGRADE_CITY",
+      "ptr": false,
+      "tn": false,
+      "cell_group": 7,
+      "amount": "count"
+    },
+    {
+      "id": 13,
+      "name": "UPGRADE_PORT",
+      "ptr": false,
+      "tn": false,
+      "cell_group": 8,
+      "amount": "count"
+    },
+    {
+      "id": 14,
+      "name": "UPGRADE_FACTORY",
+      "ptr": false,
+      "tn": false,
+      "cell_group": 9,
+      "amount": "count"
+    },
+    {
+      "id": 15,
+      "name": "UPGRADE_SAM",
+      "ptr": false,
+      "tn": false,
+      "cell_group": 10,
+      "amount": "count"
+    },
+    {
+      "id": 16,
+      "name": "UPGRADE_SILO",
+      "ptr": false,
+      "tn": false,
+      "cell_group": 11,
+      "amount": "count"
+    },
+    {
+      "id": 17,
+      "name": "BUILD_WARSHIP",
+      "ptr": false,
+      "tn": false,
+      "cell_group": 12,
+      "amount": "none"
+    },
+    {
+      "id": 18,
+      "name": "MOVE_WARSHIPS",
+      "ptr": false,
+      "tn": false,
+      "cell_group": 13,
+      "amount": "none"
+    },
+    {
+      "id": 19,
+      "name": "NUKE_ATOM",
+      "ptr": false,
+      "tn": false,
+      "cell_group": 14,
+      "amount": "count"
+    },
+    {
+      "id": 20,
+      "name": "NUKE_HYDROGEN",
+      "ptr": false,
+      "tn": false,
+      "cell_group": 15,
+      "amount": "count"
+    },
+    {
+      "id": 21,
+      "name": "MIRV",
+      "ptr": true,
+      "tn": false,
+      "cell_group": -1,
+      "amount": "none"
+    },
+    {
+      "id": 22,
+      "name": "ALLY_REQUEST",
+      "ptr": true,
+      "tn": false,
+      "cell_group": -1,
+      "amount": "none"
+    },
+    {
+      "id": 23,
+      "name": "ALLY_REJECT",
+      "ptr": true,
+      "tn": false,
+      "cell_group": -1,
+      "amount": "none"
+    },
+    {
+      "id": 24,
+      "name": "ALLY_BREAK",
+      "ptr": true,
+      "tn": false,
+      "cell_group": -1,
+      "amount": "none"
+    },
+    {
+      "id": 25,
+      "name": "ALLY_EXTEND",
+      "ptr": true,
+      "tn": false,
+      "cell_group": -1,
+      "amount": "none"
+    },
+    {
+      "id": 26,
+      "name": "EMBARGO_START",
+      "ptr": true,
+      "tn": false,
+      "cell_group": -1,
+      "amount": "none"
+    },
+    {
+      "id": 27,
+      "name": "EMBARGO_STOP",
+      "ptr": true,
+      "tn": false,
+      "cell_group": -1,
+      "amount": "none"
+    },
+    {
+      "id": 28,
+      "name": "TARGET",
+      "ptr": true,
+      "tn": false,
+      "cell_group": -1,
+      "amount": "none"
+    },
+    {
+      "id": 29,
+      "name": "DONATE_TROOPS",
+      "ptr": true,
+      "tn": false,
+      "cell_group": -1,
+      "amount": "troops"
+    },
+    {
+      "id": 30,
+      "name": "DONATE_GOLD",
+      "ptr": true,
+      "tn": false,
+      "cell_group": -1,
+      "amount": "gold"
+    }
+  ],
+  "cell_groups": [1, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+  "amount_bins": {
+    "troops": [
+      { "name": "ONE", "kind": "one", "v": 1 },
+      { "name": "F05", "kind": "frac", "v": 0.05 },
+      { "name": "F10", "kind": "frac", "v": 0.1 },
+      { "name": "F20", "kind": "frac", "v": 0.2 },
+      { "name": "F33", "kind": "frac", "v": 0.33 },
+      { "name": "F50", "kind": "frac", "v": 0.5 },
+      { "name": "F75", "kind": "frac", "v": 0.75 },
+      { "name": "F100", "kind": "frac", "v": 1 },
+      { "name": "EX30", "kind": "excess", "v": 0.3 },
+      { "name": "EX42", "kind": "excess", "v": 0.42 },
+      { "name": "M125", "kind": "match", "v": 1.25 },
+      { "name": "M167", "kind": "match", "v": 1.67 }
+    ],
+    "donate_troops": [1, 2, 3, 4, 5, 6, 7],
+    "count": [1, 2, 3, 5, 10, 50],
+    "gold": [0.1, 0.25, 0.5, 1]
+  },
+  "plane_channels": [
+    "valid",
+    "land",
+    "water",
+    "shore",
+    "relief",
+    "impassable",
+    "tn",
+    "me",
+    "friendly",
+    "hostile",
+    "bots",
+    "fallout",
+    "frontier",
+    "heat_gain",
+    "heat_loss",
+    "heat_churn",
+    "pressure",
+    "threat",
+    "own_econ",
+    "own_mil",
+    "hostile_econ",
+    "hostile_mil",
+    "own_ships",
+    "hostile_ships"
+  ],
+  "num_static_channels": 6,
+  "scalar_features": [
+    "tick",
+    "in_spawn_phase",
+    "spawn_ticks_left",
+    "immunity_ticks_left",
+    "timer_ticks_left",
+    "has_timer",
+    "win_threshold",
+    "delta",
+    "my_share",
+    "top_share",
+    "second_share",
+    "my_rank",
+    "alive_players",
+    "tn_share",
+    "log_troops",
+    "troop_fill",
+    "log_max_troops",
+    "growth_rel_peak",
+    "troops_attacking",
+    "troops_boats",
+    "incoming_troops",
+    "incoming_attacks",
+    "outgoing_attacks",
+    "log_gold",
+    "log_gold_income",
+    "tribe_gold_on_table",
+    "afford_city",
+    "afford_port",
+    "afford_factory",
+    "afford_defense_post",
+    "afford_sam",
+    "afford_silo",
+    "afford_warship",
+    "afford_atom",
+    "afford_hydrogen",
+    "afford_mirv",
+    "own_city_levels",
+    "own_port_levels",
+    "own_factory_levels",
+    "own_defense_posts",
+    "own_sam_levels",
+    "own_silo_levels",
+    "own_warships",
+    "ready_tubes",
+    "transports_in_flight",
+    "transport_available",
+    "num_allies",
+    "incoming_alliance_requests",
+    "outgoing_alliance_requests",
+    "is_traitor",
+    "traitor_ticks_left",
+    "rate_tokens_second",
+    "rate_tokens_minute",
+    "compact_map",
+    "log_land_tiles",
+    "tribes_at_start",
+    "nations_at_start",
+    "difficulty",
+    "alliances_enabled",
+    "row_hostile_share",
+    "row_tribe_share",
+    "row_max_hostile_troops",
+    "last_silent_failures",
+    "last_mask_misses"
+  ],
+  "slot_features": [
+    "valid",
+    "is_tn",
+    "human",
+    "nation",
+    "bot",
+    "alive",
+    "disconnected",
+    "friendly",
+    "allied",
+    "shares_border",
+    "boat_reachable",
+    "rel_tiles",
+    "tile_share",
+    "rel_troops",
+    "troop_fill",
+    "rel_density",
+    "rel_gold",
+    "shared_border_frac",
+    "distracted",
+    "victim",
+    "attacking_me",
+    "my_attack_on_them",
+    "annexable",
+    "immune_to_me",
+    "traitor",
+    "embargo_me_them",
+    "embargo_them_me",
+    "alliance_ticks_left",
+    "alliance_request_pending",
+    "nation_relation",
+    "centroid_dx",
+    "centroid_dy"
+  ],
+  "header_size": 64,
+  "header": [
+    { "name": "env", "dtype": "u32", "offset": 0 },
+    { "name": "seat", "dtype": "u32", "offset": 4 },
+    { "name": "episode_uid", "dtype": "u32", "offset": 8 },
+    { "name": "step", "dtype": "u32", "offset": 12 },
+    { "name": "tick", "dtype": "u32", "offset": 16 },
+    { "name": "flags", "dtype": "u32", "offset": 20 },
+    { "name": "reward", "dtype": "f32", "offset": 24 },
+    { "name": "reward_terminal", "dtype": "f32", "offset": 28 },
+    { "name": "phi", "dtype": "f32", "offset": 32 },
+    { "name": "policy_id", "dtype": "u32", "offset": 36 },
+    { "name": "intents_sent", "dtype": "u16", "offset": 40 },
+    { "name": "rate_limited", "dtype": "u16", "offset": 42 },
+    { "name": "silent_failures", "dtype": "u16", "offset": 44 },
+    { "name": "mask_misses", "dtype": "u16", "offset": 46 },
+    { "name": "outcome", "dtype": "f32", "offset": 48 },
+    { "name": "label_weight", "dtype": "f32", "offset": 52 },
+    { "name": "worker", "dtype": "u32", "offset": 56 },
+    { "name": "reserved", "dtype": "u32", "offset": 60 }
+  ],
+  "flags": {
+    "FIRST": 1,
+    "TERMINATED": 2,
+    "TRUNCATED": 4,
+    "NEEDS_ACTION": 8,
+    "SPAWN_PHASE": 16,
+    "FROM_SNAPSHOT": 32,
+    "FORCED_SPAWN": 64,
+    "SEAT_DEAD": 128,
+    "LABEL_VALID": 256,
+    "WON": 512,
+    "ENV_ERROR": 1024
+  },
+  "layouts": {
+    "S": {
+      "record_size": 29760,
+      "tensors": [
+        {
+          "name": "planes",
+          "dtype": "u8",
+          "shape": [24, 24, 32],
+          "offset": 64,
+          "bytes": 18432,
+          "bits": null
+        },
+        {
+          "name": "slot_own",
+          "dtype": "u8",
+          "shape": [9, 24, 32],
+          "offset": 18496,
+          "bytes": 6912,
+          "bits": null
+        },
+        {
+          "name": "scalars",
+          "dtype": "f32",
+          "shape": [64],
+          "offset": 25408,
+          "bytes": 256,
+          "bits": null
+        },
+        {
+          "name": "slots",
+          "dtype": "f32",
+          "shape": [9, 32],
+          "offset": 25664,
+          "bytes": 1152,
+          "bits": null
+        },
+        {
+          "name": "prev_action",
+          "dtype": "i16",
+          "shape": [2, 4],
+          "offset": 26816,
+          "bytes": 16,
+          "bits": null
+        },
+        {
+          "name": "label",
+          "dtype": "i16",
+          "shape": [2, 4],
+          "offset": 26880,
+          "bytes": 16,
+          "bits": null
+        },
+        {
+          "name": "type_cost",
+          "dtype": "f32",
+          "shape": [31],
+          "offset": 26944,
+          "bytes": 124,
+          "bits": null
+        },
+        {
+          "name": "mask_type",
+          "dtype": "u8",
+          "shape": [4],
+          "offset": 27072,
+          "bytes": 4,
+          "bits": 31
+        },
+        {
+          "name": "mask_ptr",
+          "dtype": "u8",
+          "shape": [31, 2],
+          "offset": 27136,
+          "bytes": 62,
+          "bits": 9
+        },
+        {
+          "name": "mask_amount",
+          "dtype": "u8",
+          "shape": [31, 2],
+          "offset": 27200,
+          "bytes": 62,
+          "bits": 12
+        },
+        {
+          "name": "mask_cell",
+          "dtype": "u8",
+          "shape": [16, 97],
+          "offset": 27264,
+          "bytes": 1552,
+          "bits": 769
+        },
+        {
+          "name": "mask_boat_cell",
+          "dtype": "u8",
+          "shape": [9, 97],
+          "offset": 28864,
+          "bytes": 873,
+          "bits": 769
+        }
+      ]
+    },
+    "M": {
+      "record_size": 141760,
+      "tensors": [
+        {
+          "name": "planes",
+          "dtype": "u8",
+          "shape": [24, 48, 64],
+          "offset": 64,
+          "bytes": 73728,
+          "bits": null
+        },
+        {
+          "name": "slot_own",
+          "dtype": "u8",
+          "shape": [17, 48, 64],
+          "offset": 73792,
+          "bytes": 52224,
+          "bits": null
+        },
+        {
+          "name": "scalars",
+          "dtype": "f32",
+          "shape": [64],
+          "offset": 126016,
+          "bytes": 256,
+          "bits": null
+        },
+        {
+          "name": "slots",
+          "dtype": "f32",
+          "shape": [17, 32],
+          "offset": 126272,
+          "bytes": 2176,
+          "bits": null
+        },
+        {
+          "name": "prev_action",
+          "dtype": "i16",
+          "shape": [2, 4],
+          "offset": 128448,
+          "bytes": 16,
+          "bits": null
+        },
+        {
+          "name": "label",
+          "dtype": "i16",
+          "shape": [2, 4],
+          "offset": 128512,
+          "bytes": 16,
+          "bits": null
+        },
+        {
+          "name": "type_cost",
+          "dtype": "f32",
+          "shape": [31],
+          "offset": 128576,
+          "bytes": 124,
+          "bits": null
+        },
+        {
+          "name": "mask_type",
+          "dtype": "u8",
+          "shape": [4],
+          "offset": 128704,
+          "bytes": 4,
+          "bits": 31
+        },
+        {
+          "name": "mask_ptr",
+          "dtype": "u8",
+          "shape": [31, 3],
+          "offset": 128768,
+          "bytes": 93,
+          "bits": 17
+        },
+        {
+          "name": "mask_amount",
+          "dtype": "u8",
+          "shape": [31, 2],
+          "offset": 128896,
+          "bytes": 62,
+          "bits": 12
+        },
+        {
+          "name": "mask_cell",
+          "dtype": "u8",
+          "shape": [16, 385],
+          "offset": 128960,
+          "bytes": 6160,
+          "bits": 3073
+        },
+        {
+          "name": "mask_boat_cell",
+          "dtype": "u8",
+          "shape": [17, 385],
+          "offset": 135168,
+          "bytes": 6545,
+          "bits": 3073
+        }
+      ]
+    },
+    "L": {
+      "record_size": 557632,
+      "tensors": [
+        {
+          "name": "planes",
+          "dtype": "u8",
+          "shape": [24, 96, 128],
+          "offset": 64,
+          "bytes": 294912,
+          "bits": null
+        },
+        {
+          "name": "slot_own",
+          "dtype": "u8",
+          "shape": [17, 96, 128],
+          "offset": 294976,
+          "bytes": 208896,
+          "bits": null
+        },
+        {
+          "name": "scalars",
+          "dtype": "f32",
+          "shape": [64],
+          "offset": 503872,
+          "bytes": 256,
+          "bits": null
+        },
+        {
+          "name": "slots",
+          "dtype": "f32",
+          "shape": [17, 32],
+          "offset": 504128,
+          "bytes": 2176,
+          "bits": null
+        },
+        {
+          "name": "prev_action",
+          "dtype": "i16",
+          "shape": [2, 4],
+          "offset": 506304,
+          "bytes": 16,
+          "bits": null
+        },
+        {
+          "name": "label",
+          "dtype": "i16",
+          "shape": [2, 4],
+          "offset": 506368,
+          "bytes": 16,
+          "bits": null
+        },
+        {
+          "name": "type_cost",
+          "dtype": "f32",
+          "shape": [31],
+          "offset": 506432,
+          "bytes": 124,
+          "bits": null
+        },
+        {
+          "name": "mask_type",
+          "dtype": "u8",
+          "shape": [4],
+          "offset": 506560,
+          "bytes": 4,
+          "bits": 31
+        },
+        {
+          "name": "mask_ptr",
+          "dtype": "u8",
+          "shape": [31, 3],
+          "offset": 506624,
+          "bytes": 93,
+          "bits": 17
+        },
+        {
+          "name": "mask_amount",
+          "dtype": "u8",
+          "shape": [31, 2],
+          "offset": 506752,
+          "bytes": 62,
+          "bits": 12
+        },
+        {
+          "name": "mask_cell",
+          "dtype": "u8",
+          "shape": [16, 1537],
+          "offset": 506816,
+          "bytes": 24592,
+          "bits": 12289
+        },
+        {
+          "name": "mask_boat_cell",
+          "dtype": "u8",
+          "shape": [17, 1537],
+          "offset": 531456,
+          "bytes": 26129,
+          "bits": 12289
+        }
+      ]
+    }
+  },
+  "protocol": {
+    "magic": 1280460367,
+    "version": 1,
+    "frame_header_size": 16,
+    "max_payload": 67108864,
+    "step_subheader_size": 16,
+    "action_record_size": 20,
+    "obs_subheader_size": 48,
+    "messages": {
+      "HELLO": 1,
+      "CONFIG": 2,
+      "READY": 3,
+      "RESET": 4,
+      "STEP": 5,
+      "OBS": 6,
+      "EPISODE_END": 7,
+      "SNAPSHOT_REQ": 8,
+      "SNAPSHOT": 9,
+      "PING": 10,
+      "PONG": 11,
+      "ERROR": 12,
+      "CLOSE": 13
+    }
+  },
+  "spec_hash": "3af04c2e56c85ab3ef3b925b2c968317a1e21c278958e4299246149595efa428"
+}

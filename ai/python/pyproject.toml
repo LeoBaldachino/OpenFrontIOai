@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ofrl"
+version = "0.1.0"
+description = "Reinforcement-learning agent for OpenFront (training, evaluation, serving)"
+requires-python = ">=3.10"
+dependencies = ["torch>=2.2", "numpy>=1.24", "gymnasium>=1.0"]
+
+[project.optional-dependencies]
+test = ["pytest>=7", "onnx>=1.15", "onnxruntime>=1.17"]
+
+[project.scripts]
+ofrl = "ofrl.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["ofrl*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["slow: end-to-end tests that start Node workers (deselect with -m 'not slow')"]
